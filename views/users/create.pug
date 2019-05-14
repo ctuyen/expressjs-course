@@ -11,7 +11,9 @@ block content
         .form-group
             label(for="name") Name
             input.form-control(id="name" type="text" name="name" value= values ? values.name : '')
+        
         .form-group
             label(for="phone") Phone
             input.form-control(id="phone" type="phone" name="phone" value= values ? values.phone : '')
+        
         button(type="submit" class="btn btn-primary") Create

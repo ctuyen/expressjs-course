@@ -11,7 +11,7 @@ app.use(express.static('public'))
 app.set('view engine', 'pug')
 app.set('views', './views')
 
-app.get('/', function(req,res) {
+app.get('/', function(req, res) {
     res.render('index.pug', {
         name: 'Everyone' // variable name dung trong .pug
     })
