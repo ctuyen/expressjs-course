@@ -3,6 +3,9 @@ let bodyParser = require('body-parser')
 let cookieParser = require('cookie-parser')
 
 let userRoute = require('./routes/user.route')
+let authRoute = require('./routes/auth.route')
+
+let authMiddleware = require('./middlewares/auth.middleware')
 
 const app = express()
 const port = 8080
@@ -19,6 +22,7 @@ app.get('/', function(req, res) {
     })
 })
 
-app.use('/users', userRoute)
+app.use('/users', authMiddleware.requireAuth, userRoute)
+app.use('/auth', authRoute)
 
 app.listen(port, () => console.log('app listening on port ' + port))
