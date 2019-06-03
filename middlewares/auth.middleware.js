@@ -1,17 +1,19 @@
 let db = require('../db')
 
 module.exports.requireAuth = function (req, res, next) {
-  if (!req.cookies.userId) {
+  if (!req.signedCookies.userId) {
     res.redirect('/auth/login')
     return
   }
 
-  let user = db.get('users').find({ id: req.cookies.userId }).value()
+  let user = db.get('users').find({ id: req.signedCookies.userId }).value()
 
   if(!user) {
     res.redirect('/auth/login')
     return
   }
+
+  res.locals.userNav = user
 
   next()
 }

@@ -1,4 +1,6 @@
 const shortid = require('shortid')
+const md5 = require('md5')
+
 const db = require('../db')
 
 module.exports.login = function (req, res, next) {
@@ -21,7 +23,9 @@ module.exports.postLogin = function (req, res) {
     return
   }
 
-  if (user.pass !== password) {
+  let hashedPassword = md5(password)
+
+  if (user.pass !== hashedPassword) {
     res.render('auth/login', {
       errors: [
         'Wrong password.'
@@ -30,6 +34,8 @@ module.exports.postLogin = function (req, res) {
     })
   }
   
-  res.cookie('userId', user.id)
+  res.cookie('userId', user.id, {
+    signed: true
+  })
   res.redirect('/users')
 }
