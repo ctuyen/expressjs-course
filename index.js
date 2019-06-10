@@ -3,7 +3,6 @@ require('dotenv').config()
 const express = require('express')
 let bodyParser = require('body-parser')
 let cookieParser = require('cookie-parser')
-//let md5 = require('md5')
 
 let userRoute = require('./routes/user.route')
 let authRoute = require('./routes/auth.route')
